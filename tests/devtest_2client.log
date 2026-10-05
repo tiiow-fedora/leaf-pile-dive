@@ -1,0 +1,77 @@
+2026-10-05T05:51:15.575Z,2.575900,872c,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-05T05:51:15.575Z,2.575900,872c,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-05T05:51:15.575Z,2.575900,872c,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-05T05:51:15.575Z,2.575900,872c,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-05T05:51:17.631Z,4.631088,7a68,6,Info [FLog::CreatorOutput] [LeafPileDive] server ready, 6 yards, map parts 322
+2026-10-05T05:52:10.814Z,57.814465,0850,6,Info [FLog::CreatorOutput] > for _,p in game.Players:GetPlayers() do print('MP', p.Name, p:GetAttribute('Acorns'), p:GetAttribute('Bag'), p:GetAttribute('Yards'), p:GetAttribute('DataSaving'), p.Character and p.Character:FindFirstChild('HumanoidRootPart') and p.Character.HumanoidRootPart.Position) end
+2026-10-05T05:54:43.535Z,210.535172,0850,6,Info [FLog::CreatorOutput] > for _,p in game.Players:GetPlayers() do print('MP', os.date('%X'), p.Name, p:GetAttribute('Acorns'), p:GetAttribute('Bag'), p:GetAttribute('Rake'), p:GetAttribute('BagTier'), p:GetAttribute('Yards'), p:GetAttribute('Dives'), p:GetAttribute('Quests')) end task.wait(1) game.ServerScriptService.DevRun:Invoke() for _,p in game.Pla
+2026-10-05T05:54:43.543Z,210.543198,9b74,6,Info [FLog::CreatorOutput] MP 23:54:44 Player1 0 0 1 1 1 0 [{"claimed":false,"progress":0,"text":"Find 2 golden leaves","target":2,"reward":400},{"claimed":false,"progress":1,"text":"Play for 10 minutes","target":10,"reward":1000},{"claimed":false,"progress":0,"text":"Dive 25 times","target":25,"reward":2000}]
+2026-10-05T05:54:43.543Z,210.543198,9b74,6,Info [FLog::CreatorOutput] MP 23:54:44 Player2 0 0 1 1 1 0 [{"claimed":false,"progress":0,"text":"Rake 100 leaves","target":100,"reward":400},{"claimed":false,"progress":0,"text":"Play for 10 minutes","target":10,"reward":1000},{"claimed":false,"progress":0,"text":"Rake 1,500 leaves","target":1500,"reward":2000}]
+2026-10-05T05:54:44.551Z,211.551590,0850,6,Info [FLog::CreatorOutput] PASS map part count under 2500
+2026-10-05T05:54:44.551Z,211.551590,0850,6,Info [FLog::CreatorOutput] PASS non-colliding map parts have CanTouch off
+2026-10-05T05:54:44.551Z,211.551590,0850,6,Info [FLog::CreatorOutput] PASS a pile and a tower in every yard
+2026-10-05T05:54:44.551Z,211.551590,0850,6,Info [FLog::CreatorOutput] PASS Giant Oak landmark exists
+2026-10-05T05:54:44.551Z,211.551590,0850,6,Info [FLog::CreatorOutput] PASS leaf spots inside their yard, clear of the pile
+2026-10-05T05:54:44.551Z,211.551590,0850,6,Info [FLog::CreatorOutput] PASS 80 leaves per yard
+2026-10-05T05:54:44.757Z,211.757217,0850,6,Info [FLog::CreatorOutput] PASS rake collects nearby leaves
+2026-10-05T05:54:44.757Z,211.757217,0850,6,Info [FLog::CreatorOutput] PASS raked leaves are gone until they regrow
+2026-10-05T05:54:44.757Z,211.757217,0850,6,Info [FLog::CreatorOutput] PASS only leaves inside the rake radius are taken
+2026-10-05T05:54:44.757Z,211.757217,0850,6,Info [FLog::CreatorOutput] PASS golden leaves are worth 10x
+2026-10-05T05:54:44.757Z,211.757217,0850,6,Info [FLog::CreatorOutput] PASS can't rake from 20 studs up
+2026-10-05T05:54:44.757Z,211.757217,0850,6,Info [FLog::CreatorOutput] PASS full bag takes no leaves
+2026-10-05T05:54:44.758Z,211.758224,0850,6,Info [FLog::CreatorOutput] PASS can't rake in a locked yard
+2026-10-05T05:54:45.160Z,212.160873,0850,6,Info [FLog::CreatorOutput] PASS locked yard bounces you back to its gate
+2026-10-05T05:54:45.667Z,212.667984,0850,6,Info [FLog::CreatorOutput] PASS ground dive pays bag x1
+2026-10-05T05:54:48.270Z,215.270309,9b74,6,Info [FLog::CreatorOutput] PASS 20-stud dive pays about x1.8
+2026-10-05T05:54:48.270Z,215.270309,9b74,6,Info [FLog::CreatorOutput] PASS BestDive recorded
+2026-10-05T05:54:52.973Z,219.973099,9b74,6,Info [FLog::CreatorOutput] PASS dive height is capped per yard
+2026-10-05T05:54:54.679Z,221.679276,0850,6,Info [FLog::CreatorOutput] PASS empty bag dive pays nothing
+2026-10-05T05:54:54.679Z,221.679276,0850,6,Info [FLog::CreatorOutput] PASS 2x potion doubles dive acorns
+2026-10-05T05:54:54.679Z,221.679276,0850,6,Info [FLog::CreatorOutput] PASS rake rejected when poor
+2026-10-05T05:54:54.679Z,221.679276,0850,6,Info [FLog::CreatorOutput] PASS can't skip a rake tier
+2026-10-05T05:54:54.680Z,221.680267,0850,6,Info [FLog::CreatorOutput] PASS rake bought
+2026-10-05T05:54:54.680Z,221.680267,0850,6,Info [FLog::CreatorOutput] PASS bad rake args ignored
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS rake tool follows the tier
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS bag bought
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS same bag can't be bought twice
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS can't skip a yard
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS yard 2 unlocked
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS gate is solid on the server
+2026-10-05T05:54:54.889Z,221.889206,9b74,6,Info [FLog::CreatorOutput] PASS season rejected when not ready
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS season works and resets
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS season boosts leaf value
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS daily ready
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS daily pays day 1
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS second daily claim rejected
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS day 7 gives the 2x potion
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS streak resets after 48 h
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS 3 quests, one per tier
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS quest progress from events
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS quest claim pays
+2026-10-05T05:54:54.890Z,221.890213,9b74,6,Info [FLog::CreatorOutput] PASS double/unfinished/bad quest claims ignored
+2026-10-05T05:54:54.891Z,221.891220,9b74,6,Info [FLog::CreatorOutput] PASS FillBag fills to capacity
+2026-10-05T05:54:54.891Z,221.891220,9b74,6,Info [FLog::CreatorOutput] PASS AcornCrate amount
+2026-10-05T05:54:54.891Z,221.891220,9b74,6,Info [FLog::CreatorOutput] PASS UnlockYard opens the next yard
+2026-10-05T05:54:54.891Z,221.891220,9b74,6,Info [FLog::CreatorOutput] PASS DataStore loaded in Studio (API access on)
+2026-10-05T05:54:55.353Z,222.353485,9b74,6,Info [FLog::CreatorOutput] PASS receipt FillBag granted exactly once
+2026-10-05T05:54:55.597Z,222.597824,0850,6,Info [FLog::CreatorOutput] PASS receipt Potion2x granted exactly once
+2026-10-05T05:54:55.938Z,222.938705,0850,6,Info [FLog::CreatorOutput] PASS receipt AcornCrate granted exactly once
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS receipt UnlockYard granted exactly once
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS failed save rolls back and returns NotProcessedYet
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS migration v0 -> v1 keeps values
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS migration adds defaults
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS migration rejects bad types and clamps tiers
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS current save round-trips
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS event stable within a week
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS event advances weekly
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS event ends next Monday
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS Big Dive Week: +25% acorns
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS Quest Bonus doubles quest rewards
+2026-10-05T05:54:56.236Z,223.236954,9b74,6,Info [FLog::CreatorOutput] PASS Windy Week: leaves regrow in half the time
+2026-10-05T05:54:56.639Z,223.639328,6ca4,6,Warning [FLog::CreatorWarning] Warning: [AntiCheat] Player1 moved 90 studs (up 0) in 1.1s; rubber-banded
+2026-10-05T05:54:56.846Z,223.846558,7a68,6,Info [FLog::CreatorOutput] PASS teleport/speed hack is rubber-banded
+2026-10-05T05:54:57.249Z,224.249405,7a68,6,Info [FLog::CreatorOutput] PASS falling out of the world returns you
+2026-10-05T05:54:57.249Z,224.249405,7a68,6,Info [FLog::CreatorOutput] PASS fresh profile is new
+2026-10-05T05:54:57.251Z,224.251419,7a68,6,Info [FLog::CreatorOutput] DEVTEST DONE: 64 pass, 0 fail
+2026-10-05T05:54:57.257Z,224.257446,9b74,6,Info [FLog::CreatorOutput] MP2 23:54:58 Player1 0 0 1 1 1 0 [{"claimed":false,"progress":0,"text":"Find 2 golden leaves","target":2,"reward":400},{"claimed":false,"progress":1,"text":"Play for 10 minutes","target":10,"reward":1000},{"claimed":false,"progress":0,"text":"Dive 25 times","target":25,"reward":2000}]
+2026-10-05T05:54:57.257Z,224.257446,9b74,6,Info [FLog::CreatorOutput] MP2 23:54:58 Player2 0 0 1 1 1 0 [{"claimed":false,"progress":0,"text":"Rake 100 leaves","target":100,"reward":400},{"claimed":false,"progress":0,"text":"Play for 10 minutes","target":10,"reward":1000},{"claimed":false,"progress":0,"text":"Rake 1,500 leaves","target":1500,"reward":2000}]
