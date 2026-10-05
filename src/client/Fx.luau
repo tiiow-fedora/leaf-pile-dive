@@ -75,8 +75,11 @@ function Fx.dive(yard: number, mult: number)
 		anchor:Destroy()
 	end)
 	if root then
-		local v = root.AssemblyLinearVelocity
-		root.AssemblyLinearVelocity = Vector3.new(v.X * 0.3, 55 + math.min(mult, 4) * 8, v.Z * 0.3)
+		-- bounce up and out of the pile so the player (and camera) end up outside the mound
+		local out = Vector3.new(root.Position.X - c.X, 0, root.Position.Z - c.Z)
+		out = if out.Magnitude > 0.5 then out.Unit else Vector3.new(0, 0, -1)
+		local up = 55 + math.min(mult, 4) * 8
+		root.AssemblyLinearVelocity = out * 32 + Vector3.new(0, up, 0)
 	end
 	Fx.shake(0.35, 1.5 + mult * 0.8)
 end
@@ -179,4 +182,41 @@ function Fx.updateGates(yardsUnlocked: number)
 	end
 end
 
+-- When the camera is inside a pile mound, fade the pile locally so the screen isn't all orange.
+local faded: { BasePart } = {}
+RunService.RenderStepped:Connect(function()
+	-- fade while the camera or the character is in/at the mound (the mound blocks the view)
+	local cam = workspace.CurrentCamera.CFrame.Position
+	local root = hrp()
+	local yard = Config.YardAt(if root then root.Position else cam)
+	local inside = false
+	if yard >= 1 then
+		local c = Config.PileCenter(yard)
+		local function within(p: Vector3, extra: number): boolean
+			return Vector2.new(p.X - c.X, p.Z - c.Z).Magnitude < Config.PileRadius + extra and p.Y < Config.GroundY + Config.PileHeight + 4
+		end
+		inside = within(cam, 8) or (root ~= nil and within(root.Position, 6))
+	end
+	if inside then
+		if #faded == 0 then
+			local map = workspace:FindFirstChild("Map")
+			local pile = map and map:FindFirstChild("Yard" .. yard) and (map :: any)["Yard" .. yard]:FindFirstChild("Pile")
+			if pile then
+				for _, p in pile:GetDescendants() do
+					if p:IsA("BasePart") and p.Name ~= "PileTop" then
+						p.LocalTransparencyModifier = 0.75
+						table.insert(faded, p)
+					end
+				end
+			end
+		end
+	elseif #faded > 0 then
+		for _, p in faded do
+			p.LocalTransparencyModifier = 0
+		end
+		table.clear(faded)
+	end
+end)
+
 return Fx
+
