@@ -11,7 +11,7 @@ All Studio tests ran against the real place (universe 10769447171) with code syn
 - [x] **Multiplayer** (23:54, Server + 2 clients): both load independent profiles; DevTest drove Player1 through every system while Player2's Acorns/Bag/tiers/yards/dives/quests stayed identical (`MP` vs `MP2` lines). Leaves are per player by design (server state per player, client renders its own).
 - [x] **Fresh player**: the local-server test accounts start at 0 Acorns, bag 0/40, hint "Click to rake leaves!" (screens in `tests/screens/`).
 - [x] **Layouts**: iPhone 7 667×375 (`tests/screens/phone_iphone7_667x375.png`, `phone_iphone7_shop.png`), iPad 6th gen 1024×768 (`tablet_ipad6_1024x768.png`), desktop. Bugs found and fixed: the RAKE button overlapped the touch jump button (the simulator reports a keyboard, so touch layout now keys off TouchEnabled); the Shop title ran under its tabs; on desktop the new chat window (with tabs) covers the top 37% of the left side, so the left column starts at 42%.
-- [ ] Clean 10-minute session: see below.
+- [x] **Clean session**: 23:55 → 00:06 (11 min), server + 2 clients, 0 errors / 0 warnings (`tests/clean_session.md`).
 
 ## Bugs found by testing (all fixed)
 | Found | Bug | Fix |
