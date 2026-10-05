@@ -18,8 +18,8 @@ local homes: { [number]: CFrame } = {}
 local colors: { [number]: Color3 } = {}
 local version: { [number]: number } = {} -- bumps on every take so stale regrow timers are ignored
 
-local SIZE = Vector3.new(1.9, 0.18, 1.5)
-local GOLD_SIZE = Vector3.new(2.3, 0.22, 1.9)
+local SIZE = Vector3.new(2.3, 0.35, 2.3)
+local GOLD_SIZE = Vector3.new(2.8, 0.42, 2.8)
 
 local function sparkle(p: BasePart, on: boolean)
 	local pe = p:FindFirstChild("Sparkle") :: ParticleEmitter?
@@ -65,10 +65,12 @@ function Leaves.build()
 	folder = Instance.new("Folder")
 	folder.Name = "Leaves"
 	local rng = Random.new(1234)
+	local props = ReplicatedStorage:WaitForChild("Props", 6)
+	local template = props and props:FindFirstChild("MapleLeaf") :: MeshPart?
 	for yard = 1, #Config.Yards do
 		for idx, pos in Config.LeafSpots(yard) do
 			local id = Config.LeafId(yard, idx)
-			local p = Instance.new("Part")
+			local p: BasePart = if template then template:Clone() else Instance.new("Part")
 			p.Name = "Leaf"
 			p.Anchored = true
 			p.CanCollide = false

@@ -91,6 +91,19 @@ local function tree(pos: Vector3, scale: number, palette: { Color3 }, rng: Rando
 		Color = Color3.fromRGB(110, 70, 45),
 		Material = Enum.Material.Wood,
 	}, parent)
+	local mesh = prop("TreeCanopy")
+	if mesh then
+		local s = rng:NextNumber(15, 19) * scale
+		mesh.Size = Vector3.new(s, s * 0.7, s)
+		mesh.CFrame = CFrame.new(pos + Vector3.new(0, trunkH + 2 * scale, 0)) * CFrame.Angles(0, rng:NextNumber(0, math.pi * 2), 0)
+		mesh.Color = palette[rng:NextInteger(1, #palette)]
+		mesh.Material = Enum.Material.SmoothPlastic
+		mesh.Anchored = true
+		mesh.CastShadow = true
+		mesh.Parent = parent
+		partCount += 1
+		return
+	end
 	for k = 1, 3 do
 		local off = Vector3.new(rng:NextNumber(-3, 3), trunkH + rng:NextNumber(-1, 4), rng:NextNumber(-3, 3)) * Vector3.new(scale, 1, scale)
 		local s = rng:NextNumber(10, 14) * scale
@@ -99,6 +112,17 @@ local function tree(pos: Vector3, scale: number, palette: { Color3 }, rng: Rando
 end
 
 local function pumpkin(pos: Vector3, s: number, parent: Instance)
+	local mesh = prop("Pumpkin")
+	if mesh then
+		mesh.Size = Vector3.new(4.4, 3.2, 4.4) * s
+		mesh.CFrame = CFrame.new(pos + Vector3.new(0, 1.5 * s, 0))
+		mesh.Color = Color3.fromRGB(255, 125, 20)
+		mesh.Anchored = true
+		mesh.Parent = parent
+		partCount += 1
+		decor({ Size = Vector3.new(0.5, 1.2, 0.5) * s, CFrame = CFrame.new(pos + Vector3.new(0, 3.2 * s, 0)), Color = Color3.fromRGB(70, 130, 50) }, parent)
+		return
+	end
 	ellipsoid(Vector3.new(4, 3, 4) * s, CFrame.new(pos + Vector3.new(0, 1.3 * s, 0)), Color3.fromRGB(255, 125, 20), parent)
 	decor({ Size = Vector3.new(0.5, 1.2, 0.5) * s, CFrame = CFrame.new(pos + Vector3.new(0, 3 * s, 0)), Color = Color3.fromRGB(70, 130, 50) }, parent)
 end
@@ -119,8 +143,17 @@ local function buildPile(i: number, folder: Instance)
 		main.CanTouch = false
 		main.CanQuery = false
 		main.Name = "Mound"
+		main.Color = Color3.fromRGB(240, 120, 30)
+		main.Material = Enum.Material.SmoothPlastic
 		main.Parent = pile
 		partCount += 1
+		-- coloured leaf lumps on top so it reads as a pile of leaves, not a blob
+		local rng = Random.new(i * 31)
+		for k = 1, 6 do
+			local a = k / 6 * math.pi * 2
+			local r = rng:NextNumber(4, R - 6)
+			ellipsoid(Vector3.new(8, 4, 8), CFrame.new(c + Vector3.new(math.cos(a) * r, H * 0.75 + rng:NextNumber(-1, 1), math.sin(a) * r)), Config.LeafColors[k % #Config.LeafColors + 1], pile)
+		end
 	else
 		local mound = ellipsoid(Vector3.new(R * 2, H * 2, R * 2), CFrame.new(c), Color3.fromRGB(240, 120, 30), pile)
 		mound.Name = "Mound"
@@ -304,20 +337,25 @@ end
 local function buildGiantOak(root: Instance)
 	-- the landmark: visible from the spawn, at the back of the last yard
 	local n = #Config.Yards
-	local base = Vector3.new(-28, Config.GroundY, Config.YardStartZ(n) + Config.YardLength - 18)
+	-- off to the left of the last yard so it shows beside (not behind) the top HUD from the spawn
+	local base = Vector3.new(-170, Config.GroundY, Config.YardStartZ(n) + 40)
 	local model = Instance.new("Model")
 	model.Name = "GiantOak"
 	model.Parent = root
-	local mesh = prop("GiantOak")
-	if mesh then
-		mesh.Anchored = true
-		mesh.CanCollide = false
-		mesh.CanTouch = false
-		mesh.CanQuery = false
-		mesh.Size = mesh.Size * (200 / mesh.Size.Y)
-		mesh.CFrame = CFrame.new(base + Vector3.new(0, mesh.Size.Y / 2, 0))
-		mesh.Parent = model
-		partCount += 1
+	local trunk = prop("OakTrunk")
+	local crown = prop("OakCanopy")
+	if trunk and crown then
+		trunk.Size = Vector3.new(120, 210, 120)
+		trunk.CFrame = CFrame.new(base + Vector3.new(0, 105, 0))
+		trunk.Color = Color3.fromRGB(120, 75, 45)
+		trunk.Material = Enum.Material.Wood
+		trunk.Parent = model
+		crown.Size = Vector3.new(300, 160, 300)
+		crown.CFrame = CFrame.new(base + Vector3.new(0, 235, 0))
+		crown.Color = Color3.fromRGB(255, 150, 35)
+		crown.Material = Enum.Material.SmoothPlastic
+		crown.Parent = model
+		partCount += 2
 	else
 		part({
 			Name = "Trunk",
@@ -335,7 +373,7 @@ local function buildGiantOak(root: Instance)
 			ellipsoid(Vector3.new(s, s * 0.8, s), CFrame.new(base + off), glow[k % #glow + 1], model)
 		end
 	end
-	local light = decor({ Name = "OakGlow", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(base + Vector3.new(0, 150, 0)) }, model)
+	local light = decor({ Name = "OakGlow", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(base + Vector3.new(0, 220, 0)) }, model)
 	local pl = Instance.new("PointLight")
 	pl.Color = Color3.fromRGB(255, 190, 90)
 	pl.Range = 60

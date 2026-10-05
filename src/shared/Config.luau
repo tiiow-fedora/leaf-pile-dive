@@ -223,7 +223,7 @@ function Config.LeafSpots(yard: number): { Vector3 }
 	if yard == 1 then
 		-- guaranteed first leaves right in front of the spawn
 		for k = 0, 5 do
-			table.insert(spots, Vector3.new(-6 + k * 2.4, Config.GroundY + 0.2, z0 + 18 + (k % 2) * 2))
+			table.insert(spots, Vector3.new(-6 + k * 2.4, Config.GroundY + 0.2, z0 + 25 + (k % 2) * 2))
 		end
 	end
 	local tries = 0
@@ -250,7 +250,7 @@ end
 
 function Config.SpawnCFrame(): CFrame
 	local z0 = Config.YardStartZ(1)
-	return CFrame.lookAt(Vector3.new(0, Config.GroundY + 4, z0 + 10), Config.PileCenter(1) + Vector3.new(0, 4, 0))
+	return CFrame.lookAt(Vector3.new(0, Config.GroundY + 4, z0 + 16), Config.PileCenter(1) + Vector3.new(0, 4, 0))
 end
 
 function Config.DiveMult(height: number, yard: number): number

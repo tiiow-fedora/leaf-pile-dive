@@ -116,9 +116,31 @@ local function watchTools(character: Model)
 	end)
 end
 
-player.CharacterAdded:Connect(watchTools)
+-- start every life looking down the yard (+Z, toward the pile), camera behind the
+-- character. Re-applied a few times: the camera module can reset it right after spawn.
+local function frameCamera(character: Model)
+	local root = character:WaitForChild("HumanoidRootPart", 10) :: BasePart?
+	if not root then
+		return
+	end
+	local look = Vector3.new(0, 0, 1)
+	for _, delay in { 0.1, 0.4, 1.0 } do
+		task.wait(delay)
+		if not root.Parent then
+			return
+		end
+		local cam = workspace.CurrentCamera
+		cam.CFrame = CFrame.lookAt(root.Position - look * 12 + Vector3.new(0, 6, 0), root.Position + look * 6 + Vector3.new(0, 2, 0))
+	end
+end
+
+player.CharacterAdded:Connect(function(character)
+	watchTools(character)
+	task.spawn(frameCamera, character)
+end)
 if player.Character then
 	watchTools(player.Character)
+	task.spawn(frameCamera, player.Character)
 end
 
 UserInputService.InputBegan:Connect(function(input, processed)

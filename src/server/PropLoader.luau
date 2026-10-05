@@ -9,7 +9,12 @@ local ServerStorage = game:GetService("ServerStorage")
 local PropLoader = {}
 
 local PROPS: { [string]: number } = {
-	-- filled in after the Blender meshes are uploaded (ASSETS.md); empty = primitives
+	LeafPile = 101031408684745,
+	MapleLeaf = 85404791493991,
+	OakCanopy = 83418390409889,
+	OakTrunk = 98419723218144,
+	Pumpkin = 113539707798880,
+	TreeCanopy = 113492101154866,
 }
 function PropLoader.load(timeout: number): Folder?
 	local folder = ServerStorage:FindFirstChild("Props") or Instance.new("Folder")
@@ -47,7 +52,17 @@ function PropLoader.load(timeout: number): Folder?
 	while pending > 0 and os.clock() - t0 < timeout do
 		task.wait(0.1)
 	end
-	return if #folder:GetChildren() > 0 then folder else nil
+	-- the client needs the leaf mesh for its local leaves
+	local leaf = folder:FindFirstChild("MapleLeaf")
+	if leaf then
+		local shared = game:GetService("ReplicatedStorage"):FindFirstChild("Props") or Instance.new("Folder")
+		shared.Name = "Props"
+		shared.Parent = game:GetService("ReplicatedStorage")
+		if not shared:FindFirstChild("MapleLeaf") then
+			leaf:Clone().Parent = shared
+		end
+	end
+	return if #folder:GetChildren() > 0 then folder :: Folder else nil
 end
 
 return PropLoader

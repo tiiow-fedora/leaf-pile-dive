@@ -1,0 +1,38 @@
+{
+ "LeafPile": {
+  "id": 101031408684745,
+  "moderation": {
+   "moderationState": "Approved"
+  }
+ },
+ "MapleLeaf": {
+  "id": 85404791493991,
+  "moderation": {
+   "moderationState": "Approved"
+  }
+ },
+ "OakCanopy": {
+  "id": 83418390409889,
+  "moderation": {
+   "moderationState": "Approved"
+  }
+ },
+ "OakTrunk": {
+  "id": 98419723218144,
+  "moderation": {
+   "moderationState": "Approved"
+  }
+ },
+ "Pumpkin": {
+  "id": 113539707798880,
+  "moderation": {
+   "moderationState": "Approved"
+  }
+ },
+ "TreeCanopy": {
+  "id": 113492101154866,
+  "moderation": {
+   "moderationState": "Approved"
+  }
+ }
+}

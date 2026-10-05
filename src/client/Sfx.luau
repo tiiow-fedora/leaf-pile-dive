@@ -7,17 +7,17 @@ local SoundService = game:GetService("SoundService")
 local Sfx = {}
 
 local IDS: { [string]: number } = {
-	swish = 0,
-	pop = 0,
-	gold = 0,
-	dive = 0,
-	buy = 0,
-	error = 0,
-	unlock = 0,
-	full = 0,
-	season = 0,
+	swish = 78008721818395,
+	pop = 76977355036789,
+	gold = 81825272458625,
+	dive = 123187782175662,
+	buy = 80126301424736,
+	error = 111412797258133,
+	unlock = 109529757323933,
+	full = 137240758560335,
+	season = 87059013281231,
 }
-local MUSIC_ID = 0
+local MUSIC_ID = 104785926734135
 Sfx.IDS = IDS
 
 local cache: { [string]: Sound } = {}
