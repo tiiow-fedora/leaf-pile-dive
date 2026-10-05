@@ -223,7 +223,7 @@ function Config.LeafSpots(yard: number): { Vector3 }
 	if yard == 1 then
 		-- guaranteed first leaves right in front of the spawn
 		for k = 0, 5 do
-			table.insert(spots, Vector3.new(-6 + k * 2.4, Config.GroundY + 0.2, z0 + 25 + (k % 2) * 2))
+			table.insert(spots, Vector3.new(-6 + k * 2.4, Config.GroundY + 0.2, z0 + 20 + (k % 2) * 2))
 		end
 	end
 	local tries = 0

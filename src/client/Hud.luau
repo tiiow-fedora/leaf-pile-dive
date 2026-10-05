@@ -171,7 +171,7 @@ local function makePanel(name: string, title: string, color: Color3): (Frame, Sc
 		Name = name .. "Panel",
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.52),
-		Size = UDim2.fromOffset(500, 360),
+		Size = UDim2.fromOffset(500, 500),
 		BackgroundColor3 = Theme.Panel,
 		Visible = false,
 		ZIndex = 20,
@@ -199,17 +199,17 @@ end
 
 type Row = { frame: Frame, title: TextLabel, sub: TextLabel, button: TextButton }
 local function row(list: Instance, order: number, onClick: () -> (), icon: number?): Row
-	local f = new("Frame", { Size = UDim2.new(1, -10, 0, 58), BackgroundColor3 = Theme.PanelLight, LayoutOrder = order, ZIndex = 22, Parent = list })
+	local f = new("Frame", { Size = UDim2.new(1, -10, 0, 52), BackgroundColor3 = Theme.PanelLight, LayoutOrder = order, ZIndex = 22, Parent = list })
 	Theme.corner(10).Parent = f
 	local x = 10
 	if icon and icon ~= 0 then
-		local img = new("ImageLabel", { Position = UDim2.fromOffset(6, 5), Size = UDim2.fromOffset(48, 48), BackgroundTransparency = 1, Image = "rbxassetid://" .. icon, ZIndex = 23, Parent = f })
+		local img = new("ImageLabel", { Position = UDim2.fromOffset(5, 4), Size = UDim2.fromOffset(44, 44), BackgroundTransparency = 1, Image = "rbxassetid://" .. icon, ZIndex = 23, Parent = f })
 		Theme.corner(8).Parent = img
 		x = 62
 	end
-	local title = Theme.label({ Position = UDim2.fromOffset(x, 4), Size = UDim2.new(1, -140 - x, 0, 28), TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 23, Parent = f })
-	local sub = Theme.label({ Position = UDim2.fromOffset(x, 32), Size = UDim2.new(1, -140 - x, 0, 20), TextXAlignment = Enum.TextXAlignment.Left, Font = Theme.BodyFont, TextColor3 = Theme.Muted, ZIndex = 23, Parent = f })
-	local b = Theme.button({ AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -8, 0.5, 0), Size = UDim2.fromOffset(128, 44), ZIndex = 23, Parent = f })
+	local title = Theme.label({ Position = UDim2.fromOffset(x, 3), Size = UDim2.new(1, -140 - x, 0, 26), TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 23, Parent = f })
+	local sub = Theme.label({ Position = UDim2.fromOffset(x, 29), Size = UDim2.new(1, -140 - x, 0, 19), TextXAlignment = Enum.TextXAlignment.Left, Font = Theme.BodyFont, TextColor3 = Theme.Muted, ZIndex = 23, Parent = f })
+	local b = Theme.button({ AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -8, 0.5, 0), Size = UDim2.fromOffset(128, 40), ZIndex = 23, Parent = f })
 	b.MouseButton1Click:Connect(onClick)
 	return { frame = f, title = title, sub = sub, button = b }
 end
@@ -550,8 +550,9 @@ local function layout()
 		rakeBtn.Position = UDim2.new(1, -math.floor(175 / s), 1, -math.floor(26 / s))
 		strip.Visible = vp.Y >= 520
 	else
-		-- desktop: the chat window covers the top-left; start below it
-		left.Position = UDim2.new(0, 10, 0, math.floor(236 / s))
+		-- desktop: the chat window (with its Here/Global/Friends tabs) covers the top-left
+		-- ~37% of the screen in the live client, so the column starts below that
+		left.Position = UDim2.new(0, 10, 0.42, 0)
 		rakeBtn.AnchorPoint = Vector2.new(1, 1)
 		rakeBtn.Position = UDim2.new(1, -24, 1, -24)
 		strip.Visible = true

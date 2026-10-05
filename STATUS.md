@@ -27,3 +27,6 @@ Run start: 2026-10-04 22:45 MDT (05 Oct 04:45 UTC). Hour 6 = 04:45 MDT, hour 7.5
 ## Progress
 - 22:50 Step 0 done. Step 1 research done (RESEARCH.md): **Leaf Pile Dive**.
 - 23:05 Step 2 design done (DESIGN.md, tools/balance_sim.py). Starting the build.
+- 23:40 **Live v9 public.** Built: core loop (rake, bag, climb, height-multiplied dive), 6 yards + gates, shop (7 rakes, 7 bags, yards), New Season, saving (session lock, autosave, BindToClose, versioned + migration), daily streak, 3 daily quests, yard strip, friend boost + invite, 2 global boards, weekly events, welcome gift, 4 passes + 4 products (Open Cloud), anti-cheat, synth SFX + music, Blender meshes. DevTest 64/64 in Studio. Maturity questionnaire: Minimal. Genre Simulation/Incremental Simulator.
+  - Live check v9: loads with saved data, raking + golden leaf + dive work, Fill My Bag shows the real Buy prompt (closed without buying).
+  - Found live, fixing now: left buttons hidden by the new chat window on desktop; panels too short; first leaves out of reach of the spawn.
