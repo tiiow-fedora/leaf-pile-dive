@@ -76,12 +76,13 @@ end
 function Leaderboard.build(parent: Instance)
 	local Y = Config.GroundY
 	local spawn = Config.SpawnCFrame().Position
-	local a = Vector3.new(34, Y + 13, 22)
-	local b = Vector3.new(-34, Y + 13, 22)
+	-- back corners of the Backyard, angled toward the spawn (out of the leaf field's middle)
+	local a = Vector3.new(46, Y + 13, 6)
+	local b = Vector3.new(-46, Y + 13, 6)
 	makeBoard("TopAcorns", "LeafPileDive_TopAcorns_v1", "🌰 TOP RAKERS", "Total Acorns, all servers",
-		CFrame.lookAt(a, Vector3.new(spawn.X, a.Y, spawn.Z)), Color3.fromRGB(255, 190, 60), parent)
+		CFrame.lookAt(a, Vector3.new(spawn.X, a.Y, spawn.Z + 40)), Color3.fromRGB(255, 190, 60), parent)
 	makeBoard("BestDive", "LeafPileDive_BestDive_v1", "🍂 HIGHEST DIVE", "Best dive height (studs)",
-		CFrame.lookAt(b, Vector3.new(spawn.X, b.Y, spawn.Z)), Color3.fromRGB(120, 220, 255), parent)
+		CFrame.lookAt(b, Vector3.new(spawn.X, b.Y, spawn.Z + 40)), Color3.fromRGB(120, 220, 255), parent)
 end
 
 function Leaderboard.submitTo(key: string, userId: number, value: number)

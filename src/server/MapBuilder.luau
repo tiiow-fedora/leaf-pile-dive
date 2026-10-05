@@ -148,7 +148,7 @@ local function buildPile(i: number, folder: Instance)
 		CastShadow = false,
 	}, pile)
 	local anchor = decor({ Name = "PileTop", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(0, H + 2, 0)) }, pile)
-	billboard(anchor, "🍂 DIVE HERE", Color3.fromRGB(255, 225, 120), UDim2.fromOffset(220, 50), Vector3.new(0, 6, 0), 140)
+	billboard(anchor, "🍂 DIVE HERE", Color3.fromRGB(255, 225, 120), UDim2.fromOffset(150, 34), Vector3.new(0, 4, 0), 90)
 	-- drifting leaves over the pile
 	local pe = Instance.new("ParticleEmitter")
 	pe.Texture = "rbxasset://textures/particles/sparkles_main.dds"
@@ -174,12 +174,13 @@ local function buildTower(i: number, folder: Instance)
 	model.Parent = folder
 	local wood = Color3.fromRGB(150, 95, 55)
 	part({ Name = "Pillar", Size = Vector3.new(6, H, 6), CFrame = CFrame.new(c + Vector3.new(0, H / 2, 0)), Color = wood, Material = Enum.Material.WoodPlanks }, model)
-	-- ladder on the +X side (visible from the spawn path), slightly taller than the deck
+	-- ladder on the +X side, just outside the deck's edge (a ladder under the deck
+	-- overhang traps the climber's head), in the gap the +X railing leaves open
 	part({
 		ClassName = "TrussPart",
 		Name = "Ladder",
-		Size = Vector3.new(2, H + 2, 2),
-		CFrame = CFrame.new(c + Vector3.new(4, (H + 2) / 2, 0)),
+		Size = Vector3.new(2, H + 3, 2),
+		CFrame = CFrame.new(c + Vector3.new(8.1, (H + 3) / 2, -4)),
 		Color = Color3.fromRGB(255, 200, 70),
 		Material = Enum.Material.Metal,
 	}, model)
@@ -198,9 +199,9 @@ local function buildTower(i: number, folder: Instance)
 		Color = Color3.fromRGB(70, 170, 255),
 	}, model)
 	local sign = decor({ Name = "TowerSign", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(0, H + 7, -2)) }, model)
-	billboard(sign, string.format("x%.1f DIVE!", Config.DiveMult(H + 3, i)), Color3.fromRGB(120, 230, 255), UDim2.fromOffset(200, 50), Vector3.zero, 220)
-	local lad = decor({ Name = "LadderSign", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(6, 7, 0)) }, model)
-	billboard(lad, "⬆ CLIMB", Color3.fromRGB(255, 230, 120), UDim2.fromOffset(140, 40), Vector3.zero, 90)
+	billboard(sign, string.format("x%.1f DIVE!", Config.DiveMult(H + 3, i)), Color3.fromRGB(120, 230, 255), UDim2.fromOffset(140, 34), Vector3.zero, 110)
+	local lad = decor({ Name = "LadderSign", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(10, 7, -4)) }, model)
+	billboard(lad, "⬆ CLIMB", Color3.fromRGB(255, 230, 120), UDim2.fromOffset(100, 28), Vector3.zero, 60)
 end
 
 local function buildFence(i: number, folder: Instance, layout: Layout)
@@ -233,12 +234,13 @@ local function buildFence(i: number, folder: Instance, layout: Layout)
 	gate:SetAttribute("Yard", i)
 	layout.Gates[i] = gate
 	local y = Config.Yards[i]
-	billboard(gate, "🔒 " .. string.upper(y.Name) .. "\n" .. Format.short(y.Cost) .. " 🌰", Color3.fromRGB(255, 240, 200), UDim2.fromOffset(240, 90), Vector3.new(0, 10, 0), 160)
+	billboard(gate, "🔒 " .. string.upper(y.Name) .. "\n" .. Format.short(y.Cost) .. " 🌰", Color3.fromRGB(255, 240, 200), UDim2.fromOffset(160, 60), Vector3.new(0, 9, 0), 110)
 	local prompt = Instance.new("ProximityPrompt")
 	prompt.Name = "UnlockPrompt"
 	prompt.ActionText = "Unlock " .. y.Name
 	prompt.ObjectText = Format.short(y.Cost) .. " Acorns"
 	prompt.HoldDuration = 0
+	prompt.KeyboardKeyCode = Enum.KeyCode.F -- E is the rake key
 	prompt.MaxActivationDistance = 14
 	prompt.RequiresLineOfSight = false
 	prompt.Parent = gate
@@ -295,7 +297,7 @@ local function buildYard(i: number, root: Instance, layout: Layout)
 	end
 	-- yard name sign at its entrance
 	local signAnchor = decor({ Name = "YardSign", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(-30, Config.GroundY + 8, z0 + 8) }, folder)
-	billboard(signAnchor, y.Name .. "\nleaves x" .. y.Value, Color3.fromRGB(255, 250, 230), UDim2.fromOffset(220, 80), Vector3.zero, 160)
+	billboard(signAnchor, y.Name .. "\nleaves x" .. y.Value, Color3.fromRGB(255, 250, 230), UDim2.fromOffset(140, 50), Vector3.zero, 80)
 	return folder
 end
 

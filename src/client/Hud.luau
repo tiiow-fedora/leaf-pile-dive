@@ -575,7 +575,10 @@ function Hud.build()
 	refs.bagFill = new("Frame", { Size = UDim2.fromScale(0, 1), BackgroundColor3 = Theme.Accent, Parent = bar })
 	Theme.corner(14).Parent = refs.bagFill
 	refs.bagText = Theme.label({ Size = UDim2.fromScale(1, 1), Text = "🍂 0 / 40", ZIndex = 3, Parent = bar })
-	refs.hint = Theme.label({ Position = UDim2.fromOffset(0, 78), Size = UDim2.new(1, 0, 0, 30), Text = "", TextColor3 = Color3.fromRGB(255, 240, 140), Parent = top })
+	local hintBg = new("Frame", { Position = UDim2.fromOffset(10, 78), Size = UDim2.new(1, -20, 0, 30), BackgroundColor3 = Color3.fromRGB(40, 22, 10), BackgroundTransparency = 0.35, Parent = top })
+	Theme.corner(15).Parent = hintBg
+	refs.hintBg = hintBg
+	refs.hint = Theme.label({ Size = UDim2.fromScale(1, 1), Text = "", TextColor3 = Color3.fromRGB(255, 240, 140), Parent = hintBg })
 	refs.next = Theme.label({ Position = UDim2.fromOffset(0, 108), Size = UDim2.new(1, 0, 0, 22), Text = "", Font = Theme.BodyFont, TextColor3 = Theme.Text, Parent = top })
 	refs.boosts = Theme.label({ Position = UDim2.fromOffset(0, 130), Size = UDim2.new(1, 0, 0, 18), Text = "", Font = Theme.BodyFont, TextColor3 = Color3.fromRGB(150, 255, 170), Parent = top })
 	refs.toasts = new("Frame", { Name = "Toasts", AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 160), Size = UDim2.fromOffset(560, 130), BackgroundTransparency = 1, Parent = gui })
@@ -698,6 +701,7 @@ function Hud.refresh()
 	lastBag = bag
 	local h, target = Hud.hint()
 	refs.hint.Text = h or ""
+	refs.hintBg.Visible = h ~= nil
 	refs.hintTarget = target
 	local goal, affordable = Hud.nextGoal()
 	refs.next.Text = goal

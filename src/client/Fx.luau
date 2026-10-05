@@ -145,7 +145,7 @@ function Fx.setMarker(target: string?, yard: number)
 	if target == "pile" then
 		pos = Config.PileCenter(yard) + Vector3.new(0, Config.PileHeight + 9, 0)
 	else
-		pos = Config.TowerCenter(yard) + Vector3.new(4, 12, 0)
+		pos = Config.TowerCenter(yard) + Vector3.new(8.1, 12, -4)
 	end
 	bb.Enabled = true
 	marker.Position = pos + Vector3.new(0, math.sin(os.clock() * 4) * 1.2, 0)
