@@ -1,0 +1,29 @@
+# STATUS
+
+Run start: 2026-10-04 22:45 MDT (05 Oct 04:45 UTC). Hour 6 = 04:45 MDT, hour 7.5 = 06:15 MDT.
+
+## Tools (checked 22:47)
+| Tool | Version |
+|---|---|
+| Rojo | 7.6.1 |
+| Roblox Studio | version-76e1a02649ad4f35 |
+| Roblox Player | version-02c37bc51a384b8f |
+| Blender | 5.1.2 (`C:\Program Files\Blender Foundation\Blender 5.1\blender.exe`) |
+| Python | 3.13.7 with PIL 12.2.0, numpy 2.3.5, scipy 1.18.0, OpenCV 4.13.0 |
+| ffmpeg | 9.0 full_build (gyan.dev) |
+
+## Open Cloud key probe (22:48; universe 10769447171, place 117902305686664)
+| Area | Request | Result | Meaning |
+|---|---|---|---|
+| Universe | GET /cloud/v2/universes/{U}; PATCH with empty mask | 200 / 200 | read + write OK |
+| Place | GET + PATCH empty mask | 200 / 200 | OK |
+| Place publishing | POST versions, empty and garbage body | 500 (not 401/403) | auth accepted; confirmed later by a real publish |
+| Assets | POST /assets/v1/assets, empty | 400 "FileContent required" | auth OK |
+| Game passes | GET list 200; POST empty → 400 "Name required" | | OK |
+| Developer products | GET list 200; POST empty → 400 "Name required" | | OK |
+| Thumbnail personalization | POST uploads, empty → 200 `{"fileToOperationIdDict":{}}`; GET /personalization → 500 (no config yet) | | upload OK |
+| DataStores (Open Cloud) | GET list → 403 missing `universe-datastores.control:list` | | not needed (game uses in-game DataStoreService) |
+
+## Progress
+- 22:50 Step 0 done. Step 1 research done (RESEARCH.md): **Leaf Pile Dive**.
+- 23:05 Step 2 design done (DESIGN.md, tools/balance_sim.py). Starting the build.

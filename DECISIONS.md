@@ -1,0 +1,9 @@
+# DECISIONS
+
+- **22:45 Owner approvals given in chat before the run** (the owner was present for ~5 min): (1) Gemini's "content from images and files" terms were accepted by the owner; (2) "approve music download": one Pixabay phonk track whose page shows Content ID not registered, ≤15 MB, name + link logged; (3) concept left to research; (4) make the game public, no publishing fee, accept nothing else.
+- **22:45 Project**: `3D Objects/leaf-pile-dive/` as its own git repo; `.env` stays in `3D Objects/` and `tools/rbx.py` reads it from there. Helpers copied from roblox-game (rbx, publish, upload_asset, homepage_thumbs, capture).
+- **22:55 Concept: Leaf Pile Dive** (RESEARCH.md: 43/50 vs 35 for the runner-up). Proven leaf demand (Clean all the Leaves, 9.6k players) with every other leaf game dead; the twist is the **height-multiplied dive cash-in**, which adds a vertical goal and a big feedback moment each trip.
+- **23:00 Leaves are per player and rendered on the client**: the server knows every leaf position from a seeded Config function and tracks per-player pickup times. The client only says "I swung"; the server decides which leaves are inside the radius around the server-side HumanoidRootPart. No stealing or griefing, no replicated part spam, and no exploit surface beyond the swing rate.
+- **23:00 Dive height = peak HRP Y over the last 6 s minus the pile top, capped at the yard's tower height + 10.** Any high point counts (trees, tower). The cap stops fling/fly exploits from paying more than the best legit dive; the movement check rubber-bands teleports.
+- **23:05 Yards stay unlocked through New Season** (only Acorns, rake and bag reset): walking back past locked fences after every season would be tedious and doesn't add a decision.
+- **23:05 Balance**: costs scaled ~8× from the first draft after the sim showed Giant Oak in 9 min; the Sack is cheap (150) so the first purchase lands in about a minute.

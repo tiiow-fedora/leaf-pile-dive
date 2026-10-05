@@ -1,0 +1,17 @@
+.env
+*.env
+__pycache__/
+*.rbxl
+*.rbxlx
+*.lock
+blender/out/
+*.exe
+audio/out/
+art/out/
+
+!backup/*.rbxl
+promo/raw/
+promo/tmp/
+promo/out/
+promo/music/
+tools/luau/
