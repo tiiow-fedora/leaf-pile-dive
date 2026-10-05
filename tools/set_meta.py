@@ -8,7 +8,7 @@ DESC = ("Rake autumn leaves, climb the tower and DIVE into the giant leaf pile! 
         "• Unlock 6 yards: Backyard, Park, Orchard, Pumpkin Patch, Maple Woods and the Giant Oak, each with a taller tower\n"
         "• Find golden leaves worth 10x\n"
         "• Start a New Season for a permanent leaf bonus\n"
-        "• Daily rewards, 3 daily quests, a new event every week, and a speed-up when you play with friends\n\n"
+        "• Daily rewards, 3 daily quests, a new event every week, and +10% leaves for each friend in your server (up to +30%)\n\n"
         "Controls: click / tap RAKE (or press E) to rake. Walk into the pile to cash in your bag.")
 vis = sys.argv[1] if len(sys.argv) > 1 else "PUBLIC"
 s, t = req("PATCH", f"/cloud/v2/universes/{U}?updateMask=displayName,description,visibility",
