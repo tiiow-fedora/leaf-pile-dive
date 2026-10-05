@@ -23,6 +23,13 @@ StarterGui.ResetPlayerGuiOnSpawn = false
 
 MapBuilder.setProps(PropLoader.load(8))
 local layout = MapBuilder.build()
+-- anyone who joined while the props were loading spawned before the SpawnLocation existed
+-- (at the world origin, on the back fence): respawn them on the real spawn
+for _, p in Players:GetPlayers() do
+	if p.Character then
+		task.spawn(p.LoadCharacter, p)
+	end
+end
 Leaderboard.build(workspace:WaitForChild("Map"))
 Leaderboard.start()
 

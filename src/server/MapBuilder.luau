@@ -181,7 +181,7 @@ local function buildPile(i: number, folder: Instance)
 		CastShadow = false,
 	}, pile)
 	local anchor = decor({ Name = "PileTop", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(0, H + 2, 0)) }, pile)
-	billboard(anchor, "🍂 DIVE HERE", Color3.fromRGB(255, 225, 120), UDim2.fromOffset(150, 34), Vector3.new(0, 4, 0), 90)
+	billboard(anchor, "🍂 DIVE HERE", Color3.fromRGB(255, 225, 120), UDim2.fromOffset(150, 34), Vector3.new(0, 4, 0), 55)
 	-- drifting leaves over the pile
 	local pe = Instance.new("ParticleEmitter")
 	pe.Texture = "rbxasset://textures/particles/sparkles_main.dds"
@@ -232,7 +232,7 @@ local function buildTower(i: number, folder: Instance)
 		Color = Color3.fromRGB(70, 170, 255),
 	}, model)
 	local sign = decor({ Name = "TowerSign", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(0, H + 7, -2)) }, model)
-	billboard(sign, string.format("x%.1f DIVE!", Config.DiveMult(H + 3, i)), Color3.fromRGB(120, 230, 255), UDim2.fromOffset(140, 34), Vector3.zero, 110)
+	billboard(sign, string.format("x%.1f DIVE!", Config.DiveMult(H + 3, i)), Color3.fromRGB(120, 230, 255), UDim2.fromOffset(140, 34), Vector3.zero, 50)
 	local lad = decor({ Name = "LadderSign", Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(c + Vector3.new(10, 7, -4)) }, model)
 	billboard(lad, "⬆ CLIMB", Color3.fromRGB(255, 230, 120), UDim2.fromOffset(100, 28), Vector3.zero, 60)
 end

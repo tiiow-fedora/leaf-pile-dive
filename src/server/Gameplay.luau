@@ -362,6 +362,8 @@ function Gameplay.onCharacter(player: Player, character: Model)
 		rt.sampleFrom = nil
 		table.clear(rt.history)
 	end
+	-- (facing +Z on spawn is done by the client: a server pivot here can run before the
+	-- character is placed on the SpawnLocation and drops it at the world origin)
 	character:WaitForChild("HumanoidRootPart", 10)
 	Gameplay.giveRake(player)
 	Gameplay.applyTrail(player)

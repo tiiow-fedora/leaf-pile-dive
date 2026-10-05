@@ -123,6 +123,7 @@ end
 local profiles: { [Player]: Profile } = {}
 local loaded: { [Player]: boolean } = {}
 local saving: { [Player]: boolean } = {}
+local releasing: { [Player]: boolean } = {} -- leave-save in flight; BindToClose must not save again
 
 local function key(userId: number): string
 	return "u_" .. userId
@@ -269,42 +270,51 @@ function DataService.hasReceipt(profile: Profile, purchaseId: string): boolean
 	return table.find(profile.Receipts, purchaseId) ~= nil
 end
 
-function DataService.release(player: Player)
+-- Final save for a leaving player. Marked as releasing *before* anything yields, so the
+-- PlayerRemoving and BindToClose paths never write the same keys twice.
+function DataService.release(player: Player, onBeforeSave: ((Player) -> ())?)
+	if releasing[player] then
+		return
+	end
+	releasing[player] = true
+	if onBeforeSave then
+		onBeforeSave(player)
+	end
 	DataService.save(player, true)
 	profiles[player] = nil
 	loaded[player] = nil
+	releasing[player] = nil
 end
 
 function DataService.start(onBeforeSave: (Player) -> ())
 	Players.PlayerRemoving:Connect(function(player)
-		onBeforeSave(player)
-		DataService.release(player)
+		DataService.release(player, onBeforeSave)
 	end)
 
 	task.spawn(function()
 		while true do
 			task.wait(60)
 			for player in profiles do
-				task.spawn(function()
-					onBeforeSave(player)
-					DataService.save(player)
-				end)
+				if not releasing[player] then
+					task.spawn(function()
+						onBeforeSave(player)
+						DataService.save(player)
+					end)
+				end
 			end
 		end
 	end)
 
 	game:BindToClose(function()
-		local pending = 0
+		-- players whose leave-save is already running are skipped (one write per key,
+		-- otherwise the DataStore queue warns); then wait for every save to finish
 		for player in profiles do
-			pending += 1
-			task.spawn(function()
-				onBeforeSave(player)
-				DataService.save(player, true)
-				pending -= 1
-			end)
+			if not releasing[player] then
+				task.spawn(DataService.release, player, onBeforeSave)
+			end
 		end
 		local t0 = os.clock()
-		while pending > 0 and os.clock() - t0 < 25 do
+		while next(profiles) ~= nil and os.clock() - t0 < 25 do
 			task.wait(0.1)
 		end
 	end)

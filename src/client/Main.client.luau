@@ -123,15 +123,29 @@ local function frameCamera(character: Model)
 	if not root then
 		return
 	end
+	-- the camera module re-frames itself once the character settles (seen at ~1-2 s), so
+	-- hold the framing every frame for the first 2.5 s; the character owns its physics,
+	-- so the client also turns it to face +Z
 	local look = Vector3.new(0, 0, 1)
-	for _, delay in { 0.1, 0.4, 1.0 } do
-		task.wait(delay)
-		if not root.Parent then
+	local t0 = os.clock()
+	local conn
+	conn = RunService.RenderStepped:Connect(function()
+		if not root.Parent or os.clock() - t0 > 2.5 then
+			conn:Disconnect()
 			return
 		end
-		local cam = workspace.CurrentCamera
-		cam.CFrame = CFrame.lookAt(root.Position - look * 12 + Vector3.new(0, 6, 0), root.Position + look * 6 + Vector3.new(0, 2, 0))
-	end
+		local pos = root.Position
+		-- only turn once the character is really on a spawn point (right after CharacterAdded
+		-- it can still be at the origin; turning it there would pin it on the back fence)
+		local onSpawn = (pos - Config.SpawnCFrame().Position).Magnitude < 15
+		for y = 2, #Config.Yards do
+			onSpawn = onSpawn or (Vector2.new(pos.X + 30, pos.Z - Config.YardStartZ(y) - 6).Magnitude < 8)
+		end
+		if onSpawn and root.CFrame.LookVector.Z < 0.95 then
+			root.CFrame = CFrame.lookAt(pos, pos + look)
+		end
+		workspace.CurrentCamera.CFrame = CFrame.lookAt(pos - look * 12 + Vector3.new(0, 6, 0), pos + look * 6 + Vector3.new(0, 2, 0))
+	end)
 end
 
 player.CharacterAdded:Connect(function(character)

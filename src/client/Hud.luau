@@ -179,7 +179,7 @@ local function makePanel(name: string, title: string, color: Color3): (Frame, Sc
 	})
 	Theme.corner(16).Parent = f
 	Theme.stroke(Color3.fromRGB(30, 15, 5), 3).Parent = f
-	Theme.label({ Size = UDim2.new(1, -60, 0, 44), Position = UDim2.fromOffset(16, 6), Text = title, TextColor3 = color, TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 21, Parent = f })
+	Theme.label({ Size = UDim2.new(if name == "Shop" then 0 else 1, if name == "Shop" then 150 else -60, 0, 40), Position = UDim2.fromOffset(16, 8), Text = title, TextColor3 = color, TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 21, Parent = f })
 	local close = Theme.button({ Text = "X", Size = UDim2.fromOffset(42, 42), Position = UDim2.new(1, -50, 0, 8), BackgroundColor3 = Theme.Red, ZIndex = 21, Parent = f })
 	close.MouseButton1Click:Connect(closeAll)
 	local list = new("ScrollingFrame", {
@@ -223,7 +223,7 @@ end
 
 local function buildShop()
 	local f, list = makePanel("Shop", "🛒 SHOP", Theme.Gold)
-	local tabs = new("Frame", { Position = UDim2.new(0, 150, 0, 10), Size = UDim2.new(1, -210, 0, 36), BackgroundTransparency = 1, ZIndex = 21, Parent = f })
+	local tabs = new("Frame", { Position = UDim2.new(0, 168, 0, 10), Size = UDim2.new(1, -226, 0, 36), BackgroundTransparency = 1, ZIndex = 21, Parent = f })
 	new("UIListLayout", { FillDirection = Enum.FillDirection.Horizontal, Padding = UDim.new(0, 6), Parent = tabs })
 	local current = "Rakes"
 	local rows: { Row } = {}
@@ -311,7 +311,7 @@ local function buildShop()
 	end
 	local tabButtons: { [string]: TextButton } = {}
 	for _, name in { "Rakes", "Bags", "Yards" } do
-		local b = Theme.button({ Text = string.upper(name), Size = UDim2.fromOffset(92, 34), BackgroundColor3 = Theme.PanelLight, ZIndex = 22, Parent = tabs })
+		local b = Theme.button({ Text = string.upper(name), Size = UDim2.fromOffset(84, 34), BackgroundColor3 = Theme.PanelLight, ZIndex = 22, Parent = tabs })
 		tabButtons[name] = b
 		b.MouseButton1Click:Connect(function()
 			current = name
@@ -530,11 +530,10 @@ end
 local function layout()
 	local cam = workspace.CurrentCamera
 	local vp = cam.ViewportSize
-	isTouch = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
+	-- any touch screen gets the touch layout (the thumbstick and jump button are on screen);
+	-- Studio's device simulator also reports a keyboard, so KeyboardEnabled can't be used here
+	isTouch = UserInputService.TouchEnabled
 	isPhone = vp.Y < 520 or (isTouch and vp.X < 900)
-	if vp.Y < 520 then
-		isTouch = isTouch or UserInputService.TouchEnabled
-	end
 	local s = math.clamp(vp.Y / 820, 0.62, 1.1)
 	scale.Scale = s
 	local left = refs.left :: Frame
