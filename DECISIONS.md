@@ -15,3 +15,6 @@
 - **23:24 Publishing**: Studio was open with the experience's Team Create session, so the first API publish got 409. Closed Studio, then `tools/publish.py` → version 9.
 - **23:25 Name/description/server size (20) via Open Cloud**; visibility PATCH returned 200 but stayed PRIVATE, so I made it Public in Creator Hub. Maturity questionnaire answered "No" to all 14 sections (true for this game) → label **Minimal**.
 - **23:33 Genre: Simulation → Incremental Simulator.** Creator Hub warns the genre can only change once every 3 months; this is the accurate genre for a collect/upgrade/rebirth game, so I confirmed.
+- **00:37 → 06:57 Session paused** (no activity for ~6 h until the owner typed "Resume"). Work time used before the pause was ~1 h 55 min, so the 8-hour budget and the hour-6/7.5 cut-offs are counted in working time from here.
+- **00:35 Promo footage**: the dev console overlay (used to script a climb) can't be closed reliably from automation and ends up in the gdigrab capture, so only takes without it are used (take4 0–30 s, take2 tail).
+- **00:36 Pile fade**: while the player or camera is inside a pile, the pile turns 75% transparent locally (otherwise the whole screen is orange after a walk-in dive).
