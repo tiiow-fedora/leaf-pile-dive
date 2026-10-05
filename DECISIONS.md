@@ -7,3 +7,11 @@
 - **23:00 Dive height = peak HRP Y over the last 6 s minus the pile top, capped at the yard's tower height + 10.** Any high point counts (trees, tower). The cap stops fling/fly exploits from paying more than the best legit dive; the movement check rubber-bands teleports.
 - **23:05 Yards stay unlocked through New Season** (only Acorns, rake and bag reset): walking back past locked fences after every season would be tedious and doesn't add a decision.
 - **23:05 Balance**: costs scaled ~8× from the first draft after the sim showed Giant Oak in 9 min; the Sack is cheap (150) so the first purchase lands in about a minute.
+- **23:15 Mesh leaves + Blender props, primitives kept as fallback**: MapleLeaf, LeafPile, OakTrunk/OakCanopy, TreeCanopy, Pumpkin (all approved at upload). The leaf mesh is copied to ReplicatedStorage so the client can render its local leaves with it.
+- **23:16 Ladder outside the deck overhang**: in the first climb test, a truss under the deck trapped the climber's head. Moved to the deck edge (x+8.1) in the gap the railing leaves.
+- **23:17 Gate unlock prompt on F**: E is the rake key; with E the gate's ProximityPrompt fired while raking nearby.
+- **23:20 Camera framed on spawn by the client** (+Z, re-applied at 0.1/0.4/1.0 s): Studio sometimes started the camera facing the character's front. Spawn moved 6 studs off the back fence so the camera isn't behind it.
+- **23:21 Giant Oak moved to x = -170 beside the last yard and enlarged**: straight ahead it hid behind the top-centre HUD.
+- **23:24 Publishing**: Studio was open with the experience's Team Create session, so the first API publish got 409. Closed Studio, then `tools/publish.py` → version 9.
+- **23:25 Name/description/server size (20) via Open Cloud**; visibility PATCH returned 200 but stayed PRIVATE, so I made it Public in Creator Hub. Maturity questionnaire answered "No" to all 14 sections (true for this game) → label **Minimal**.
+- **23:33 Genre: Simulation → Incremental Simulator.** Creator Hub warns the genre can only change once every 3 months; this is the accurate genre for a collect/upgrade/rebirth game, so I confirmed.
