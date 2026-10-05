@@ -400,6 +400,12 @@ function MapBuilder.build(): Layout
 	if old then
 		old:Destroy()
 	end
+	-- the Studio template's baseplate and spawn would sit on top of yard 1
+	for _, child in workspace:GetChildren() do
+		if child.Name == "Baseplate" or child:IsA("SpawnLocation") then
+			child:Destroy()
+		end
+	end
 	local root = Instance.new("Folder")
 	root.Name = "Map"
 	local layout: Layout = { PartCount = 0, Gates = {} }
@@ -420,7 +426,8 @@ function MapBuilder.build(): Layout
 	spawn.Name = "Spawn"
 	spawn.Anchored = true
 	spawn.Size = Vector3.new(10, 1, 10)
-	spawn.CFrame = CFrame.new(spawnCF.Position.X, Config.GroundY + 0.1, spawnCF.Position.Z)
+	-- SpawnLocation's front (-Z) must face +Z (toward the pile), so turn it around
+	spawn.CFrame = CFrame.new(spawnCF.Position.X, Config.GroundY + 0.1, spawnCF.Position.Z) * CFrame.Angles(0, math.pi, 0)
 	spawn.Color = Color3.fromRGB(255, 190, 60)
 	spawn.Material = Enum.Material.SmoothPlastic
 	spawn.Transparency = 0.2

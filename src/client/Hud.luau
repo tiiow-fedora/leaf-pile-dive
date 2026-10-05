@@ -198,11 +198,17 @@ local function makePanel(name: string, title: string, color: Color3): (Frame, Sc
 end
 
 type Row = { frame: Frame, title: TextLabel, sub: TextLabel, button: TextButton }
-local function row(list: Instance, order: number, onClick: () -> ()): Row
+local function row(list: Instance, order: number, onClick: () -> (), icon: number?): Row
 	local f = new("Frame", { Size = UDim2.new(1, -10, 0, 58), BackgroundColor3 = Theme.PanelLight, LayoutOrder = order, ZIndex = 22, Parent = list })
 	Theme.corner(10).Parent = f
-	local title = Theme.label({ Position = UDim2.fromOffset(10, 4), Size = UDim2.new(1, -150, 0, 28), TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 23, Parent = f })
-	local sub = Theme.label({ Position = UDim2.fromOffset(10, 32), Size = UDim2.new(1, -150, 0, 20), TextXAlignment = Enum.TextXAlignment.Left, Font = Theme.BodyFont, TextColor3 = Theme.Muted, ZIndex = 23, Parent = f })
+	local x = 10
+	if icon and icon ~= 0 then
+		local img = new("ImageLabel", { Position = UDim2.fromOffset(6, 5), Size = UDim2.fromOffset(48, 48), BackgroundTransparency = 1, Image = "rbxassetid://" .. icon, ZIndex = 23, Parent = f })
+		Theme.corner(8).Parent = img
+		x = 62
+	end
+	local title = Theme.label({ Position = UDim2.fromOffset(x, 4), Size = UDim2.new(1, -140 - x, 0, 28), TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 23, Parent = f })
+	local sub = Theme.label({ Position = UDim2.fromOffset(x, 32), Size = UDim2.new(1, -140 - x, 0, 20), TextXAlignment = Enum.TextXAlignment.Left, Font = Theme.BodyFont, TextColor3 = Theme.Muted, ZIndex = 23, Parent = f })
 	local b = Theme.button({ AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -8, 0.5, 0), Size = UDim2.fromOffset(128, 44), ZIndex = 23, Parent = f })
 	b.MouseButton1Click:Connect(onClick)
 	return { frame = f, title = title, sub = sub, button = b }
@@ -335,7 +341,7 @@ local function buildStore()
 			if pass.Id ~= 0 and not attr("Pass_" .. key, false) then
 				MarketplaceService:PromptGamePassPurchase(player, pass.Id)
 			end
-		end)
+		end, pass.Icon)
 		rw.title.Text = pass.Name .. "  (pass)"
 		rw.sub.Text = pass.Desc
 		rows["pass_" .. key] = rw
@@ -346,7 +352,7 @@ local function buildStore()
 			if prod.Id ~= 0 then
 				MarketplaceService:PromptProductPurchase(player, prod.Id)
 			end
-		end)
+		end, prod.Icon)
 		rw.title.Text = prod.Name
 		rw.sub.Text = prod.Desc
 		rows["prod_" .. key] = rw
@@ -642,7 +648,7 @@ function Hud.build()
 	refs.rakeBtn = rakeBtn
 
 	-- bottom: yard progress strip + event chip
-	local strip = new("Frame", { Name = "YardStrip", AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.new(0.5, 0, 1, -8), Size = UDim2.fromOffset(372, 48), BackgroundTransparency = 1, Parent = gui })
+	local strip = new("Frame", { Name = "YardStrip", AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.new(0.5, 0, 1, -8), Size = UDim2.fromOffset(372, 30), BackgroundTransparency = 1, Parent = gui })
 	new("UIListLayout", { FillDirection = Enum.FillDirection.Horizontal, Padding = UDim.new(0, 4), HorizontalAlignment = Enum.HorizontalAlignment.Center, Parent = strip })
 	refs.strip = strip
 	refs.stripCells = {}
@@ -652,7 +658,7 @@ function Hud.build()
 		Theme.label({ Size = UDim2.fromScale(1, 1), Text = string.split(y.Name, " ")[1], Font = Theme.BodyFont, Parent = c })
 		refs.stripCells[i] = c
 	end
-	refs.event = Theme.label({ AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.new(0.5, 0, 1, -42), Size = UDim2.fromOffset(372, 18), Text = "", Font = Theme.BodyFont, TextColor3 = Color3.fromRGB(255, 220, 130), Parent = gui })
+	refs.event = Theme.label({ AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.new(0.5, 0, 1, -42), Size = UDim2.fromOffset(420, 20), Text = "", Font = Theme.BodyFont, TextColor3 = Color3.fromRGB(255, 220, 130), Parent = gui })
 
 	buildShop()
 	buildStore()

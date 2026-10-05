@@ -152,21 +152,21 @@ function Config.EventEndsAt(t: number): number
 end
 
 -- Monetization. IDs filled in after creation through Open Cloud (MONETIZATION.md).
-export type Pass = { Id: number, Name: string, Price: number, Desc: string }
+export type Pass = { Id: number, Icon: number, Name: string, Price: number, Desc: string }
 Config.Passes = {
-	Leaves2x = { Id = 0, Name = "2x Leaves", Price = 199, Desc = "Every leaf is worth 2x, forever" },
-	BigBag = { Id = 0, Name = "Big Bag", Price = 149, Desc = "Bag holds 2x as many leaves, forever" },
-	AutoRake = { Id = 0, Name = "Auto Rake", Price = 129, Desc = "Your rake swings by itself (toggle)" },
-	VIP = { Id = 0, Name = "VIP", Price = 99, Desc = "1.25x Acorns, gold leaf trail, [VIP] tag" },
+	Leaves2x = { Id = 2006835426, Icon = 121092167842520, Name = "2x Leaves", Price = 199, Desc = "Every leaf is worth 2x, forever" },
+	BigBag = { Id = 2006535369, Icon = 81533698302024, Name = "Big Bag", Price = 149, Desc = "Bag holds 2x as many leaves, forever" },
+	AutoRake = { Id = 2006679404, Icon = 90731398935148, Name = "Auto Rake", Price = 129, Desc = "Your rake swings by itself (toggle)" },
+	VIP = { Id = 2006295483, Icon = 70996659611330, Name = "VIP", Price = 99, Desc = "1.25x Acorns, gold leaf trail, [VIP] tag" },
 } :: { [string]: Pass }
 Config.PassOrder = { "Leaves2x", "BigBag", "AutoRake", "VIP" }
 
-export type Product = { Id: number, Name: string, Price: number, Desc: string }
+export type Product = { Id: number, Icon: number, Name: string, Price: number, Desc: string }
 Config.Products = {
-	FillBag = { Id = 0, Name = "Fill My Bag", Price = 15, Desc = "Your bag is filled to the top right now" },
-	Potion2x = { Id = 0, Name = "2x Acorns (10 min)", Price = 39, Desc = "2x Acorns from dives for 10 minutes" },
-	AcornCrate = { Id = 0, Name = "Acorn Crate", Price = 49, Desc = "Acorns worth 5 full bags (min 500)" },
-	UnlockYard = { Id = 0, Name = "Unlock Next Yard", Price = 79, Desc = "Opens the next locked yard now" },
+	FillBag = { Id = 3716623789, Icon = 111347584495995, Name = "Fill My Bag", Price = 15, Desc = "Your bag is filled to the top right now" },
+	Potion2x = { Id = 3716623793, Icon = 103260538018694, Name = "2x Acorns (10 min)", Price = 39, Desc = "2x Acorns from dives for 10 minutes" },
+	AcornCrate = { Id = 3716623799, Icon = 102437134768653, Name = "Acorn Crate", Price = 49, Desc = "Acorns worth 5 full bags (min 500)" },
+	UnlockYard = { Id = 3716623805, Icon = 128154220361426, Name = "Unlock Next Yard", Price = 79, Desc = "Opens the next locked yard now" },
 } :: { [string]: Product }
 Config.ProductOrder = { "FillBag", "Potion2x", "AcornCrate", "UnlockYard" }
 

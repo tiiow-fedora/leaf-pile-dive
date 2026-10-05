@@ -327,7 +327,7 @@ function DevTest.run()
 	check("current save round-trips", cur.Acorns == backup.Acorns and cur.Yards == backup.Yards and cur.Season == backup.Season)
 
 	-- 9. weekly events
-	local t0 = 1791331200 -- Monday 2026-10-05 00:00 UTC
+	local t0 = 1791158400 -- Monday 2026-10-05 00:00 UTC
 	check("event stable within a week", Config.EventIndexAt(t0) == Config.EventIndexAt(t0 + 6 * 86400 + 86399))
 	check("event advances weekly", Config.EventIndexAt(t0 + 7 * 86400) == Config.EventIndexAt(t0) % #Config.WeeklyEvents + 1)
 	check("event ends next Monday", Config.EventEndsAt(t0 + 3600) == t0 + 7 * 86400)
